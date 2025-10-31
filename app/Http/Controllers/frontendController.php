@@ -52,7 +52,8 @@ class frontendController extends Controller
     {
         $banner = Banner::first();
         $protfolio = Protfolio::findOrFail($id);
-        return view('frontend.portfolioDetails', compact('protfolio','banner'));
+        $testimonials = Testimonial::latest()->first();
+        return view('frontend.portfolioDetails', compact('protfolio','banner', 'testimonials'));
     }
 
     public function serviceDetails($id)

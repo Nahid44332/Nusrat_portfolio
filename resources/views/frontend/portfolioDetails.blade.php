@@ -50,7 +50,8 @@
                         <h2>{{ $protfolio->name }}</h2>
 
                         <div class="meta-info">
-                            <span class="date"><i class="bi bi-calendar"></i>{{ \Carbon\Carbon::parse($protfolio->date)->format('d M Y') }}</span>
+                            <span class="date"><i
+                                    class="bi bi-calendar"></i>{{ \Carbon\Carbon::parse($protfolio->date)->format('d M Y') }}</span>
                             <span class="category"><i class="bi bi-tag"></i>{{ $protfolio->category->name }}</span>
                             <span class="client"><i class="bi bi-building"></i>{{ $protfolio->client }}</span>
                         </div>
@@ -61,50 +62,39 @@
 
                         <h3>Project Overview</h3>
                         <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                            accusantium doloremque laudantium.
+                            {{ $protfolio->overview }}
                         </p>
 
                         <div class="highlights-box">
                             <h4>Key Highlights</h4>
                             <ul>
-                                <li><i class="bi bi-check-circle"></i> Responsive design across all devices</li>
-                                <li><i class="bi bi-check-circle"></i> Advanced user authentication system</li>
-                                <li><i class="bi bi-check-circle"></i> Real-time data synchronization</li>
-                                <li><i class="bi bi-check-circle"></i> Optimized performance and loading speed</li>
-                                <li><i class="bi bi-check-circle"></i> Comprehensive admin dashboard</li>
+                                @foreach (json_decode($protfolio->key_highlights, true) as $highlight)
+                                    <li><i class="bi bi-check-circle"></i> {{ $highlight }}</li>
+                                @endforeach
                             </ul>
                         </div>
 
                         <h3>Technical Implementation</h3>
                         <p>
-                            Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                            fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                            Our system is built using a robust and scalable architecture that ensures efficiency, security, and seamless performance. The backend has been developed with Laravel, leveraging its powerful MVC framework to maintain clean and organized code. For data storage, MySQL is used to manage relational data efficiently, while optimized queries ensure faster data retrieval. The frontend utilizes modern technologies such as HTML5, CSS3, Bootstrap, and JavaScript for a responsive and user-friendly interface that works smoothly across all devices.
                         </p>
 
                         <blockquote>
                             <i class="bi bi-quote quote-icon"></i>
                             <p>
-                                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-                                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-                                quaerat voluptatem.
+                               {{$testimonials->message}}
                             </p>
                             <div class="author">
-                                <img src="{{ asset('frontend/assets/img/person/person-m-7.webp') }}" alt="Author">
+                                <img src="{{ asset('uploads/testimonials/'.$testimonials->photo) }}" alt="Author">
                                 <div class="author-info">
-                                    <h5>Michael Anderson</h5>
-                                    <span>Project Lead</span>
+                                    <h5>{{$testimonials->name}}</h5>
+                                    <span>{{$testimonials->designation}}</span>
                                 </div>
                             </div>
                         </blockquote>
 
                         <p>
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                            deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                            provident, similique sunt in culpa qui officia deserunt mollitia animi.
+                           Additionally, RESTful APIs are integrated to handle communication between different modules, ensuring modularity and easy future expansion. Authentication and authorization have been implemented using Laravel’s built-in security features, including CSRF protection, hashed passwords, and role-based access control. The entire application is hosted on a reliable server environment with proper deployment automation, ensuring continuous delivery and version control via Git. This technical stack collectively provides a stable, secure, and high-performing web platform.
                         </p>
 
                     </div>
@@ -135,7 +125,7 @@
                             </div>
                             <div class="info-item">
                                 <span class="label">Technologies</span>
-                                <span class="value">{{$protfolio->tools}}</span>
+                                <span class="value">{{ $protfolio->tools }}</span>
                             </div>
                             <a href="#" class="btn-primary" target="_blank">
                                 <i class="bi bi-box-arrow-up-right"></i> View Live Project

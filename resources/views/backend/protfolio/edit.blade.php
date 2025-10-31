@@ -134,6 +134,11 @@
                     <input type="url" name="github_link" class="form-control highlighted" value="{{ $protfolio->github_link }}" placeholder="https://github.com/...">
                 </div>
 
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold text-light">Description</label>
+                    <textarea name="description" id="summernote1" class="form-control highlighted summernote" rows="4" placeholder="Write short description..."></textarea>
+                </div>
+
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-light">Current Image</label><br>
                     @if($protfolio->image)

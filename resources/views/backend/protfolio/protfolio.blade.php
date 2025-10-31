@@ -118,8 +118,8 @@
                 <tbody>
                     @forelse($protfolios as $protfolio)
                         <tr>
-                            <td><img src="{{ asset('uploads/protfolios/' . $protfolio->image) }}" alt="" width="70"
-                                    class="rounded"></td>
+                            <td><img src="{{ asset('uploads/protfolios/' . $protfolio->image) }}" alt=""
+                                    width="70" class="rounded"></td>
                             <td>{{ $protfolio->name }}</td>
                             <td>{{ $protfolio->category->name }}</td>
                             <td>{{ $protfolio->tools }}</td>
@@ -226,6 +226,24 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label fw-bold">Project Overview</label>
+                            <textarea name="overview" id="summernoteOverview" class="form-control highlighted summernote" rows="4"
+                                placeholder="Write project overview..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Key Highlights</label>
+                            <div id="highlights-wrapper">
+                                <div class="d-flex mb-2">
+                                    <input type="text" name="key_highlights[]" class="form-control highlighted me-2"
+                                        placeholder="Enter highlight">
+                                    <button type="button" class="btn btn-success add-highlight">+</button>
+                                </div>
+                            </div> 
+                        </div>
+
+
+                        <div class="mb-3">
                             <label class="form-label fw-bold">Upload Project Image</label>
                             <input type="file" name="image" class="form-control highlighted" accept="image/*"
                                 required>
@@ -279,4 +297,26 @@
             $('#summernote1').summernote();
         });
     </script>
+
+    <script>
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('add-highlight')) {
+        const wrapper = document.getElementById('highlights-wrapper');
+        const newField = document.createElement('div');
+        newField.classList.add('d-flex', 'mb-2');
+        newField.innerHTML = `
+            <input type="text" name="key_highlights[]" class="form-control highlighted me-2"
+                placeholder="Enter highlight">
+            <button type="button" class="btn btn-danger remove-highlight">-</button>
+        `;
+        wrapper.appendChild(newField);
+    }
+
+    if (e.target.classList.contains('remove-highlight')) {
+        e.target.parentElement.remove();
+    }
+});
+</script>
+
+
 @endpush

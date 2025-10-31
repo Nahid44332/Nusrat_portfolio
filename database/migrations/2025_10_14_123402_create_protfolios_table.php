@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('client')->nullable();
             $table->string('date')->nullable();
             $table->string('duration')->nullable();
+            $table->longText('overview')->nullable();
+            $table->json('key_highlights')->nullable();
             $table->timestamps();
         });
     }

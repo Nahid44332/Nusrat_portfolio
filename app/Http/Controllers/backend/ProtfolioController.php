@@ -38,6 +38,11 @@ class ProtfolioController extends Controller
         $protfolio->client = $request->client;
         $protfolio->date = $request->date;
         $protfolio->duration = $request->duration;
+        $protfolio->overview = $request->overview;
+
+    if ($request->has('key_highlights')) {
+        $protfolio->key_highlights = json_encode($request->key_highlights);
+    }
         $protfolio->save();
 
         return back()->with('success', 'Protfolio added successfully!');

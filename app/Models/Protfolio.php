@@ -21,6 +21,12 @@ class Protfolio extends Model
         'client',
         'date',
         'duration',
+        'overview',
+        'key_highlights',
+    ];
+
+    protected $casts = [
+        'key_highlights' => 'array', 
     ];
 
       public function category()
