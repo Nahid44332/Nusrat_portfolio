@@ -22,8 +22,7 @@ class frontendController extends Controller
         $skills = Skill::all();
         $services = Service::all();
         $protfolios = Protfolio::all();
-       $blogs = Blog::all();
-       $blogs = Blog::all();
+       $blogs = Blog::with('category')->get();
       $setting = SiteSetting::first();
         return view('frontend.index', compact('banner', 'about','skills','services','protfolios','blogs','setting'));
     }
@@ -66,12 +65,13 @@ class frontendController extends Controller
 
     return view('frontend.serviceDetails', compact('banner', 'about', 'setting', 'service', 'testimonial'));
 }
-    public function blogDetails()
+    public function blogDetails($id)
     {
         $banner = Banner::first();
     $about = About::first();
      $setting = SiteSetting::first();
-    return view('frontend.blogDetails', compact('banner', 'about','setting'));
+     $blogs = Blog::find($id);
+    return view('frontend.blogDetails', compact('banner', 'about','setting', 'blogs'));
     }
     public function privacy()
     {

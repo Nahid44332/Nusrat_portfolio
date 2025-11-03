@@ -66,7 +66,7 @@
       <div class="col-lg-8">
 
         <div class="blog-featured">
-          <img src="{{ asset('frontend/assets/img/portfolio/portfolio-3.webp') }}" alt="Blog Image" class="img-fluid rounded-3 shadow">
+          <img src="{{ asset('uploads/blog/'.$blogs->image) }}" alt="Blog Image" class="img-fluid rounded-3 shadow">
         </div>
 
         <div class="blog-meta mt-4">
@@ -76,35 +76,14 @@
         </div>
 
         <div class="blog-content mt-4">
-          <h2 class="fw-bold mb-3">Designing for Humans: The Art of User-Centered UI/UX</h2>
-          <p>
-            Great design begins with understanding people. UI/UX design is not just about visuals — it's about emotions, ease, and connection. 
-            When a user lands on your site, they should feel guided, not confused. Every button, color, and animation must have a purpose.
-          </p>
-
-          <p>
-            A user-friendly interface simplifies complex tasks, making technology feel natural. It’s a balance between beauty and functionality — 
-            where each element speaks to the user’s subconscious comfort.
-          </p>
-
-  <blockquote class="custom-quote">
-    <i class="bi bi-quote"></i>
-    <p>“Design is not just what it looks like and feels like. Design is how it works.”</p>
-    <div class="author">— Steve Jobs</div>
-  </blockquote>
-
-
-          <p>
-            In today's fast-paced world, responsive design and accessibility are not optional — they’re essential. 
-            A great designer thinks about inclusivity, ensuring that everyone — regardless of device or ability — can enjoy the same seamless experience.
-          </p>
+          <h2 class="fw-bold mb-3">{{$blogs->title}}</h2>
+         {!! $blogs->content !!}
 
           <h3 class="mt-5">Key Takeaways</h3>
           <ul class="list-unstyled mt-3">
-            <li><i class="bi bi-check-circle text-danger"></i> Understand your users deeply before designing</li>
-            <li><i class="bi bi-check-circle text-danger"></i> Keep design clean, simple, and consistent</li>
-            <li><i class="bi bi-check-circle text-danger"></i> Test frequently and iterate based on feedback</li>
-            <li><i class="bi bi-check-circle text-danger"></i> Focus on performance and accessibility</li>
+            @foreach(json_decode($blogs->key_takeaways) as $takeaway)
+            <li><i class="bi bi-check-circle text-danger"></i> {{ $takeaway }}</li>
+              @endforeach
           </ul>
 
           <p class="mt-4">

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [frontendController::class, 'index']);
 Route::get('/portfolio/details/{id}', [frontendController::class, 'portfolioDetails']);
 Route::get('/service-details/{id}', [frontendController::class, 'serviceDetails']);
-Route::get('/blog-details', [frontendController::class, 'blogDetails']);
+Route::get('/blog-details/{id}', [frontendController::class, 'blogDetails']);
 Route::get('/privacy', [frontendController::class, 'privacy']);
 Route::get('/starter-page', [frontendController::class, 'starterPage']);
 Route::get('/terms', [frontendController::class, 'terms']);

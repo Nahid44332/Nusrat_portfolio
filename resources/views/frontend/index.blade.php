@@ -553,7 +553,7 @@ From responsive websites to dynamic web solutions, I focus on delivering quality
                                     alt="Creative Project" class="img-fluid" loading="lazy">
                                 <div class="portfolio-overlay">
                                     <div class="portfolio-info">
-                                        <span class="project-category">{{ $protfolio->category}}</span>
+                                        <span class="project-category">{{ $blog->category->name}}</span>
                                         <h4> {{$blog->title}}</h4>
                                     </div>
                                     <div class="portfolio-actions">
@@ -561,7 +561,7 @@ From responsive websites to dynamic web solutions, I focus on delivering quality
                                             class="glightbox portfolio-link">
                                             <i class="bi bi-plus-lg"></i>
                                         </a>
-                                        <a href="{{ url('/blog-details') }}" class="portfolio-details">
+                                        <a href="{{ url('blog-details/'.$blog->id) }}" class="portfolio-details">
                                             <i class="bi bi-arrow-right"></i>
                                         </a>
                                     </div>

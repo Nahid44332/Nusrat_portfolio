@@ -18,42 +18,55 @@ class BlogCrontroller extends Controller
     }
 
     public function store(Request $request)
-    {
-        $blog = new Blog();
-        $blog->title = $request->title;
-        $blog->slug = Str::slug($request->title);
-        $blog->category_id = $request->category_id;
-        $blog->content = $request->content;
+{
+    $blog = new Blog();
+    $blog->title = $request->title;
+    $blog->slug = Str::slug($request->title);
+    $blog->category_id = $request->category_id;
+    $blog->content = $request->content;
 
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('uploads/blog'), $filename);
-            $blog->image = $filename;
-        }
-
-        $blog->save();
-        return back()->with('success', '✅ Blog added successfully!');
+    // ✅ এই অংশটা পরিবর্তন করো
+    if ($request->has('key_takeaways')) {
+        // ফাঁকা বাদ দিয়ে encode করো
+        $takeaways = array_filter($request->key_takeaways, fn($t) => !empty(trim($t)));
+        $blog->key_takeaways = json_encode(array_values($takeaways));
     }
+
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $file->move(public_path('uploads/blog'), $filename);
+        $blog->image = $filename;
+    }
+
+    $blog->save();
+    return back()->with('success', '✅ Blog added successfully!');
+}
+
 
     public function update(Request $request, $id)
-    {
-        $blog = Blog::findOrFail($id);
-        $blog->title = $request->title;
-        $blog->slug = Str::slug($request->title);
-        $blog->category_id = $request->category_id;
-        $blog->content = $request->content;
+{
+    $blog = Blog::findOrFail($id);
+    $blog->title = $request->title;
+    $blog->slug = Str::slug($request->title);
+    $blog->category_id = $request->category_id;
+    $blog->content = $request->content;
 
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('uploads/blog'), $filename);
-            $blog->image = $filename;
-        }
-
-        $blog->save();
-        return back()->with('success', '✏️ Blog updated successfully!');
+    if ($request->has('key_takeaways')) {
+        $takeaways = array_filter($request->key_takeaways, fn($t) => !empty(trim($t)));
+        $blog->key_takeaways = json_encode(array_values($takeaways));
     }
+
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $file->move(public_path('uploads/blog'), $filename);
+        $blog->image = $filename;
+    }
+
+    $blog->save();
+    return back()->with('success', '✏️ Blog updated successfully!');
+}
 
     public function delete($id)
     {
